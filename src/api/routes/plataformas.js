@@ -1,4 +1,5 @@
 const { isAdmin } = require("../../middlewares/auth")
+const upload = require("../../middlewares/file")
 const {getPlataformas, getPlataformasById, postPlataforma, putPlataforma, deletePlataforma} = require("../controllers/plataformas")
 
 const plataformasRouter = require("express").Router()

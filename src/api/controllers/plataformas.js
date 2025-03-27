@@ -28,6 +28,9 @@ const postPlataforma = async (req, res, next) => {
   try {
     console.log(req.body)
     const newPlataforma = new Plataforma(req.body)
+    if (req.file) {
+      newPlataforma.imagen = req.file.path;
+    }
     const plataformaSaved = await newPlataforma.save()
     return res.status(201).json(plataformaSaved)
     

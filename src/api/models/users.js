@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
       enum: ['admin', 'user'],
       default: 'user',
     },
-    cursos: [{ type: mongoose.Types.ObjectId,ref:"cursos", required:false}],
+    /*cursos: [{ type: mongoose.Types.ObjectId,ref:"cursos", required:false}],*/
   },
   {
     timestamps: true,

@@ -39,7 +39,7 @@ const putCurso = async (req, res, next) => {
     return res.status(400).json("Error en put")
   }
 }
-const postCurso = async (req, res, next) => {
+/*const postCurso = async (req, res, next) => {
   try {
     if (req.user.rol !== "admin") {
       return res.status(403).json({ message: "Acceso denegado. Solo los administradores pueden publicar cursos." });
@@ -57,7 +57,30 @@ const postCurso = async (req, res, next) => {
     console.log(req.user)
     return res.status(400).json({ message: "Error al publicar el curso", error });
   }
+};*/
+const postCurso = async (req, res, next) => {
+  try {
+    const newCurso = new Curso(req.body);
+    
+    if (req.file) {
+      newJuego.imagen = req.file.path;
+    }
+
+    if (req.user.rol === "admin") {
+      newCurso.verified = true;
+    } else {
+      newCurso.verified = false;
+    }
+
+    const cursoSaved = await newcurso.save();
+
+    return res.status(201).json(cursoSaved);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };
+
+
 const deleteCurso = async (req, res, next) => {
   try {
     const {id }= req.params

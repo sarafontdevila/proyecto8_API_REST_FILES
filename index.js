@@ -6,18 +6,18 @@ const cors = require("cors")
 const mainRouter = require("./src/api/routes/main")
 const cloudinary = require("cloudinary").v2
 
+const app = express()
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET
 })
 
-const app = express()
+app.use(express.json())
 app.use(cors())
 
 connectDB()
-
-app.use(express.json())
 
 app.use("/api/v1/", mainRouter)
 

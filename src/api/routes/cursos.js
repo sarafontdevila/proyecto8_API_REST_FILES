@@ -1,9 +1,10 @@
 const { isAdmin, isAuth} = require("../../middlewares/auth")
+const upload = require("../../middlewares/file")
 const {getCursos, postCurso, putCurso, deleteCurso} = require("../controllers/cursos")
 
 const cursosRouter = require("express").Router()
 
-const upload = require("../../middlewares/file")
+
 
 
 cursosRouter.put("/:id", [isAdmin],putCurso)

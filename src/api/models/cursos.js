@@ -9,7 +9,7 @@ const cursoSchema = new mongoose.Schema({
     "tecnologia",
     "finanzas"
   ]},
-  plataforma: { type: mongoose.Types.ObjectId,ref:"plataformas", required:false},
+  /*plataforma: { type: mongoose.Types.ObjectId,ref:"plataformas", required:false},*/
   
   verified: {type:Boolean, required:true, default:true},
 },
