@@ -1,3 +1,4 @@
+const { deleteFile } = require("../../utils/deleteFile");
 const Curso = require("../models/cursos")
 
 const getCursos = async (req, res, next) => {
@@ -27,11 +28,25 @@ const getCursos = async (req, res, next) => {
     
   }
 }*/
+const getCursosAdmin = async (req, res, next) => {
+  try {
+    const cursos = await Curso.find({ verified: false });
+    return res.status(200).json(cursos);
+  } catch (error) {
+    return res.status(400).json("Error en la solicitud");
+  }
+};
 const putCurso = async (req, res, next) => {
   try {
     const { id }= req.params
     const newCurso = new Curso(req.body)
     newCurso._id = id
+
+    if (req.file) {
+      newCurso.imagen = req.file.path;
+      const oldCurso = await Curso.findById(id);
+      deleteFile(oldCurso.imagen);
+    }
     const cursoUpdated = await Curso.findByIdAndUpdate(id, newCurso, {new: true})
     return res.status(200).json(cursoUpdated)
 
@@ -63,7 +78,7 @@ const postCurso = async (req, res, next) => {
     const newCurso = new Curso(req.body);
     
     if (req.file) {
-      newJuego.imagen = req.file.path;
+      newCurso.imagen = req.file.path;
     }
 
     if (req.user.rol === "admin") {
@@ -72,7 +87,7 @@ const postCurso = async (req, res, next) => {
       newCurso.verified = false;
     }
 
-    const cursoSaved = await newcurso.save();
+    const cursoSaved = await newCurso.save();
 
     return res.status(201).json(cursoSaved);
   } catch (error) {
@@ -85,6 +100,7 @@ const deleteCurso = async (req, res, next) => {
   try {
     const {id }= req.params
     const cursoDeleted = await Curso.findByIdAndDelete(id)
+    deleteFile(cursoDeleted.imagen)
     return res.status(200).json(cursoDeleted)
   } catch (error) { 
     return res.status(400).json("Error en delete")
@@ -93,6 +109,7 @@ const deleteCurso = async (req, res, next) => {
 }
 module.exports = {
   getCursos,
+  getCursosAdmin,
   postCurso,
   putCurso,
   deleteCurso,

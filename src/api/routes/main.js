@@ -1,5 +1,5 @@
-const plataformasRouter = require("./plataformas")
 const cursosRouter = require("./cursos")
+const plataformasRouter = require("./plataformas")
 const usersRoutes = require("./users")
 const mainRouter = require("express").Router()
 

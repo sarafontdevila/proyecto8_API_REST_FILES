@@ -1,3 +1,4 @@
+const { deleteFile } = require("../../utils/deleteFile")
 const Plataforma = require("../models/plataformas")
 
 const getPlataformas = async (req, res, next) => {
@@ -45,7 +46,11 @@ const putPlataforma = async (req, res, next) => {
     const oldPlataforma = await Plataforma.findById(id)
     const newPlataforma = new Plataforma(req.body)
     newPlataforma._id = id
-    newPlataforma.apps = [...oldPlataforma.apps,...req.body.apps]
+    newPlataforma.cursos = [...oldPlataforma.cursos,...req.body.cursos]
+    if (req.file) {
+      newPlataforma.imagen = req.file.path;
+      deleteFile(oldPlataforma.imagen);}
+
     const plataformaUpdated = await Plataforma.findByIdAndUpdate(id, newPlataforma, {new: true})
     return res.status(200).json(plataformaUpdated)
 

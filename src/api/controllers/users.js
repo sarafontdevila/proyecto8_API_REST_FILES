@@ -5,7 +5,7 @@ const cursos = require('../models/cursos')
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.find().populate("cursos", "nombre")
+    const users = await User.find()/*.populate("cursos", "nombre")*/
     return res.status(200).json(users)
   } catch (error) {
     return res.status(400).json(error)
@@ -60,7 +60,7 @@ const register = async (req, res, next) => {
     const newUser = new User({
       username: req.body.username,
       password: req.body.password,
-      rol: rol
+      rol: "user"
     })
     const duplicateUser = await User.findOne({ username: req.body.username })
     if (duplicateUser) {

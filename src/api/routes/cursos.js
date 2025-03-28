@@ -4,12 +4,9 @@ const {getCursos, postCurso, putCurso, deleteCurso} = require("../controllers/cu
 
 const cursosRouter = require("express").Router()
 
-
-
-
-cursosRouter.put("/:id", [isAdmin],putCurso)
-cursosRouter.delete("/:id",[isAdmin],deleteCurso)
-cursosRouter.post("/",[isAdmin],upload.single("imagen"),postCurso)
 cursosRouter.get("/", getCursos)
+cursosRouter.post("/",[isAdmin],upload.single("imagen"),postCurso)
+cursosRouter.put("/:id", [isAdmin],upload.single("imagen"),putCurso)
+cursosRouter.delete("/:id",[isAdmin],deleteCurso)
 
 module.exports = cursosRouter

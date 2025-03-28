@@ -11,7 +11,7 @@ const cursoSchema = new mongoose.Schema({
   ]},
   /*plataforma: { type: mongoose.Types.ObjectId,ref:"plataformas", required:false},*/
   
-  verified: {type:Boolean, required:true, default:true},
+  verified: {type:Boolean, required:true, default:false},
 },
 
 {

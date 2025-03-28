@@ -4,11 +4,11 @@ const {getPlataformas, getPlataformasById, postPlataforma, putPlataforma, delete
 
 const plataformasRouter = require("express").Router()
 
-
-plataformasRouter.get("/:id", getPlataformasById)
-plataformasRouter.put("/:id", [isAdmin],putPlataforma)
-plataformasRouter.delete("/:id",[isAdmin],deletePlataforma)
-plataformasRouter.post("/", postPlataforma)
 plataformasRouter.get("/", getPlataformas)
+plataformasRouter.get("/:id", getPlataformasById)
+plataformasRouter.put("/:id", [isAdmin],upload.single("imagen"),putPlataforma)
+plataformasRouter.delete("/:id",[isAdmin],deletePlataforma)
+plataformasRouter.post("/", upload.single("imagen"),postPlataforma)
+
 
 module.exports = plataformasRouter
