@@ -46,6 +46,7 @@ const putPlataforma = async (req, res, next) => {
     const oldPlataforma = await Plataforma.findById(id)
     const newPlataforma = new Plataforma(req.body)
     newPlataforma._id = id
+    const cursos = req.body.cursos || []
     newPlataforma.cursos = [...oldPlataforma.cursos,...req.body.cursos]
     if (req.file) {
       newPlataforma.imagen = req.file.path;
@@ -62,6 +63,7 @@ const deletePlataforma = async (req, res, next) => {
   try {
     const {id }= req.params
     const plataformaDeleted = await Plataforma.findByIdAndDelete(id)
+    deleteFile(plataformaDeleted.imagen)
     return res.status(200).json(plataformaDeleted)
   } catch (error) { 
     return res.status(400).json("Error en delete")

@@ -6,7 +6,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "Proyecto8",
-    allowedFormats: ["jpg", "png", "jpeg", "gif"],
+    allowedFormats: ["jpg", "png", "jpeg", "gif","webp"],
 },
 });
 
