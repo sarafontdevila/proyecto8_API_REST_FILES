@@ -40,7 +40,7 @@ const postPlataforma = async (req, res, next) => {
     
   }
 }
-const putPlataforma = async (req, res, next) => {
+/*const putPlataforma = async (req, res, next) => {
   try {
     const { id }= req.params
     const oldPlataforma = await Plataforma.findById(id)
@@ -59,7 +59,33 @@ const putPlataforma = async (req, res, next) => {
   } catch (error) {
     return res.status(400).json("Error en put")
   }
-}
+}*/
+const putPlataforma = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const oldPlataforma = await Plataforma.findById(id);
+    
+    if (!oldPlataforma) {
+      return res.status(404).json({ message: "Plataforma no encontrada" });
+    }
+    const updatedFields = { ...req.body };
+
+    updatedFields.cursos = [...new Set([...oldPlataforma.cursos, ...(req.body.cursos || [])])];
+
+    if (req.file) {
+      if (oldPlataforma.imagen) {
+        deleteFile(oldPlataforma.imagen);
+      }
+      updatedFields.imagen = req.file.path;
+    }
+
+    const plataformaUpdated = await Plataforma.findByIdAndUpdate(id, updatedFields, { new: true });
+
+    return res.status(200).json(plataformaUpdated);
+  } catch (error) {
+    return res.status(500).json({ message: "Error en PUT", error: error.message });
+  }
+};
 const deletePlataforma = async (req, res, next) => {
   try {
     const {id }= req.params
