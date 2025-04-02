@@ -46,13 +46,14 @@ const putPlataforma = async (req, res, next) => {
     const oldPlataforma = await Plataforma.findById(id)
     const newPlataforma = new Plataforma(req.body)
     newPlataforma._id = id
-    const cursos = req.body.cursos || []
+    const cursos = req.body.cursos || [];
     newPlataforma.cursos = [...oldPlataforma.cursos,...req.body.cursos]
     if (req.file) {
       newPlataforma.imagen = req.file.path;
       deleteFile(oldPlataforma.imagen);}
 
     const plataformaUpdated = await Plataforma.findByIdAndUpdate(id, newPlataforma, {new: true})
+    
     return res.status(200).json(plataformaUpdated)
 
   } catch (error) {
