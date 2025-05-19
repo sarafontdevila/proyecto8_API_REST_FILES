@@ -37,5 +37,5 @@ const createStorage = (folderName) => {
   });
 };
 /*const upload = multer({ storage });*/
-const upload = multer({ storage: createStorage("differentFolder") });
-module.exports = upload
+const differentUpload = multer({ storage: createStorage("differentFolder") });
+module.exports = differentUpload
