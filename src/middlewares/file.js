@@ -2,7 +2,7 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-const getFolder = () => {
+/*const getFolder = () => {
   return process.env.CLOUDINARY_FOLDER || "proyecto8"; 
 };
 
@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
     folder: getFolder(), 
     allowedFormats: ["jpg", "png", "jpeg", "gif", "webp"],
   }),
-});
+});*/
 
 /*const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
@@ -21,6 +21,21 @@ const storage = new CloudinaryStorage({
     allowedFormats: ["jpg", "png", "jpeg", "gif","webp"],
 },
 });*/
+const getDefaultFolder = () => {
+  return process.env.CLOUDINARY_FOLDER || "proyecto8";
+};
 
-const upload = multer({ storage });
+const createStorage = (folderName) => {
+  const folder = folderName || getDefaultFolder();
+
+  return new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: (req, file) => ({
+      folder: folder,
+      allowedFormats: ["jpg", "png", "jpeg", "gif", "webp"],
+    }),
+  });
+};
+/*const upload = multer({ storage });*/
+const upload = multer({ storage: createStorage("differentFolder") });
 module.exports = upload
