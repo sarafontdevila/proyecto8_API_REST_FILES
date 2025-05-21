@@ -1,9 +1,10 @@
 # proyecto8_API_REST_FILES📦
  
-
-
 Descripción
-API de Gestión desarrollada en Node.js con Express y MongoDB, que permite relacionar plataformas de cursos con cursos y usuarios. La aplicación implementa operaciones CRUD para tres colecciones principales e incluye middlewares de autenticación personalizados.
+
+API de Gestión desarrollada en Node.js con Express y MongoDB, que permite relacionar plataformas de cursos con cursos y usuarios. 
+La aplicación implementa operaciones CRUD para tres colecciones principales e incluye middlewares de autenticación personalizados.
+
 🚀 Características Principales
 Tecnologías Utilizadas
 
@@ -22,10 +23,7 @@ Middlewares de seguridad
 Cloudinary para tratamiento de imagenes
 
 📂 Estructura del Proyecto
-CopyPROYECTO7_API_AUTH/
-│
-├── node_modules/ # Dependencias del proyecto
-│
+
 ├── src/
 │ ├── api/ # Lógica de la API (controllers/models/routes)
 │ ├── config/ # Configuraciones del proyecto (db/jwt)
@@ -45,33 +43,23 @@ CopyPROYECTO7_API_AUTH/
 ├── package.json # Configuración del proyecto
 ├── package-lock.json # Bloqueo de versiones de dependencias
 └── README.md # Documentación del proyecto
-📦 Instalación y Configuración
-Requisitos Previos
 
+📦 Instalación y Configuración
+
+Requisitos Previos
 Node.js (versión 14 o superior)
 MongoDB
-npm
 
 Pasos de Instalación
 
 Clonar el repositorio
+bash Copy git clone https://github.com/sarafontdevila/proyecto8_API_REST_FILES.git
+cd proyecto8_API_REST_FILES
 
-bashCopygit clone https://github.com/sarafontdevila/proyecto8_API_REST_FILES.git
-cd proyecto8_API_REST_FILE
+Instalar dependencias:
+bash Copy npm install
 
-Instalar dependencias
-
-bashCopynpm install
-
-Configurar variables de entorno
-Crea un archivo .env con las variables necesarias:
-
-CopyMONGODB_URI=tu_cadena_de_conexion_mongodb
-PORT=3000
-JWT_SECRET=tu_secreto_jwt
-
-Iniciar el servidor
-
+Iniciar el servidor:
 bash Copy npm start
 
 🌐 Estructura de Middlewares
@@ -79,15 +67,13 @@ Autenticación (middlewares/auth.js)
 
 Middleware principal de autenticación
 Verificación de tokens
-Control de acceso por roles
+Control de acceso por roles (user/admin)
 
 Semillas de Datos (utils/seeds/cursos.js)
-
-Script para poblar base de datos
-Creación de datos iniciales de prueba
+ -Script para poblar base de datos
+ -Creación de datos iniciales de prueba
 
 🌐 Endpoints de la API
-
 Users
 
 POST /api/v1/users/register: Registro de usuarios
@@ -120,3 +106,7 @@ Validación de tokens JWT
 
 📄 Licencia
 Uso libre. Desarrollado por Sara Fontdevila.
+
+
+
+
